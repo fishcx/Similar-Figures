@@ -1,0 +1,252 @@
+<script>
+	$(document).ready(function() {
+    
+    $('.changeItem').change(function(){
+        $('#generate').click();
+    });
+
+    $(document).keypress(function (e) {
+        var key = e.which;
+         if(key == 13)  // the enter key code
+         {
+            $('#generate').click();
+             return false;  
+          }
+    });
+    
+    $('#video-button').hide();
+    
+    var testing = false;
+    $('#generate').click(function(){
+        if(!testing){$("#answer").hide(); $("#show-answer").val("Show Answer");}
+
+        var type;
+        // handles the formatting for selecting any type
+        if($("#type").val()=="any"){type = random(1,3);}
+        else{type = parseInt($("#type").val())}
+
+        generate(type);       
+     });
+
+
+    $("#show-answer").click(function(){
+       if($("#answer").is(":hidden") ){
+          $("#answer").show();
+          $("#show-answer").val("Hide Answer");
+       } else{
+         $("#answer").hide();
+         $("#show-answer").val("Show Answer");
+        }
+    });
+    
+    if(testing){ $("#answer").show();}
+    
+	});
+	function generate(type){
+       
+       var videoLinks = ["https://www.youtube.com/watch?v=bz_CINpgVWo",
+                         "https://www.youtube.com/watch?v=BoRK05emIrg",
+                         "https://www.youtube.com/watch?v=PCSx2Bu3Wwc"];
+       
+       if(videoLinks[type-1].length != 0){ 
+         $("#videoLink"). attr("href", videoLinks[type-1]);
+         $('#video-button').show();
+       }
+       else{
+         $('#video-button').hide();
+       }
+       
+       var problem = "";
+       var answer = "";
+       var a,b,c,d,e,f,g,h,sf;
+       $("#generated").html("");
+       $("#answer").html("");
+   
+       switch(type) {
+           // Determine the scale factor
+           // (between corresponding points, side lengths, perimeters, areas, going in the opposite direction)
+           case 1: 
+           
+           sf = random(2,10);
+           answer = "Scale factor \\(= "+sf+"\\)";
+           
+           switch(random(0,4)){
+              
+              // Using corresponding points, determine the scale factor
+              case 0:
+                a = random(-10,10);
+                b = random(-10,10);
+                c = a*sf;
+                d = b*sf;
+                
+                problem = "A scale factor is applied to coordinate point \\(("+a+", "+b+")\\) to become the new point \\(("+c+", "+d+")\\). What is the scale factor?";
+              
+              break;
+           
+              // Using corresponding side lengths, determine the scale factor
+              case 1:
+                a = random(2,20);
+                b = sf*a;
+                
+                problem = "Triangle \\(ABC\\) is similar to triangle \\(DEF\\). <br><br>If \\(AB\\) corresponds to \\(DE\\), \\(AB="+a+"\\), and \\(DE="+b+"\\), what is the scale factor from \\(ABC\\) to \\(DEF\\)? ";
+              
+              break;
+              
+              // Using corresponding perimeters, determine the scale factor
+              case 2:
+                a = random(15,100);
+                b = sf*a;
+                
+                problem = "Triangle \\(ABC\\) is similar to triangle \\(DEF\\). <br><br>If the perimeter of \\(ABC\\) is \\("+a+"\\) and the perimeter of \\(DEF\\) is \\("+b+"\\), what is the scale factor from \\(ABC\\) to \\(DEF\\)? ";
+              
+              break;
+              
+              // Using corresponding areas, determine the scale factor
+              case 3:
+                a = random(15,50);
+                b = sf*sf*a;
+                
+                problem = "Triangle \\(ABC\\) is similar to triangle \\(DEF\\). <br><br>If the area of \\(ABC\\) is \\("+a+"\\) and the area of \\(DEF\\) is \\("+b+"\\), what is the scale factor from \\(ABC\\) to \\(DEF\\)? ";
+                         
+              break;
+              
+              // Using scale factor from A to B, find scale factor from B to A
+              case 4:
+                a = random(15,50);
+                b = sf*sf*a;
+                
+                problem = "Triangle \\(ABC\\) is similar to triangle \\(DEF\\). <br><br>If the scale factor from \\(DEF\\) to \\(ABC\\) is \\(\\frac{1}{"+sf+"}\\), what is the scale factor from \\(ABC\\) to \\(DEF\\)? ";
+              
+              break;
+           
+           }
+           
+           
+           break;
+           
+           // Converting the scale factor
+           // Scale factor conversion between percent, decimal, and rule
+           case 2: 
+           sf = randomDec(2,10,1); 
+           a = formatDec(sf*100); // percent
+           b = "\\(("+sf+"x, "+sf+"y)\\)"; //rule
+           switch(random(0,2)){
+              
+              // Decimal to rule and percent
+              case 0:
+              
+              problem = "The scale factor from shape \\(A\\) to shape \\(B\\) is \\("+sf+"\\). What is this written as a percent and as a coordinate rule?";
+              answer = "Percent = \\("+a+"\\%\\), Rule = "+b;
+              
+              break;
+              
+              // Rule to decimal and percent
+              case 1:
+              
+              problem = "The scale factor from shape \\(A\\) to shape \\(B\\) is \\("+a+"\\%\\). What is this written as a decimal and as a coordinate rule?";
+              answer = "Decimal = \\("+sf+"\\), Rule = "+b;
+
+              break;
+              
+              // Percent to decimal and rule
+              case 2:
+              
+              problem = "The rule from shape \\(A\\) to shape \\(B\\) is "+b+". What is the scale factor written as a decimal and as a percent?";
+              answer = "Decimal = \\("+sf+"\\), Percent = \\("+a+"\\%\\)";
+
+              break;
+           
+           }
+           
+           break;
+           
+           // Using the scale factor
+           // Determine how the scale factor (as a percent, decimal, or rule) affects coordinates, side lengths, perimeter, area, angles
+           case 3: 
+           sf = randomDec(2,10,1); 
+           a = formatDec(sf*100); // percent
+           b = "\\(("+sf+"x, "+sf+"y)\\)"; //rule
+           
+           problem = "Triangle \\(ABC\\) is similar to triangle \\(DEF\\)<br><br>";
+           
+           // determine the format of the scale factor
+           switch(random(0,2)){
+              
+              // scale factor is a decimal
+              case 0:
+              problem += "The scale factor from \\(ABC\\) to \\(DEF\\) is \\("+sf+"\\).";
+              break;
+              
+              // scale factor is a percent
+              case 1:
+              problem += "The scale factor from \\(ABC\\) to \\(DEF\\) is \\("+a+"\\%\\).";
+              break;
+              
+              // scale factor is given as a rule
+              case 2:
+              problem += "The rule from \\(ABC\\) to \\(DEF\\) is "+b+".";
+              break;
+           
+           }
+           
+           // determine the affected parts
+           
+           switch(random(0,4)){
+           
+              // coordinates (*sf)
+              case 0:
+              c = random(-10,10);
+              d = random(-10,10);
+              e = formatDec(sf*c);
+              f = formatDec(sf*d);
+              
+              problem += " If \\(A = ("+c+", "+d+")\\) corresponds to \\(D\\), what are the coordinates of \\(D\\)?"; 
+              answer = "\\(D = ("+e+", "+f+")\\)";
+              break;
+               
+              // side lengths (*sf)
+              case 1:
+              c = random(2,15);
+              d = formatDec(sf*c);
+              
+              problem += " If \\(AB = "+c+"\\) and \\(AB\\) corresponds to \\(DE\\), what is the length of \\(DE\\)?"; 
+              answer = "\\(DE = "+d+"\\)"; 
+              break;
+               
+              // perimeters (*sf)
+              case 2:
+              c = random(10,50);
+              d = formatDec(sf*c);
+              
+              problem += " If the perimeter of \\(ABC\\) is \\("+c+"\\), what is the perimeter of \\(DEF\\)?"; 
+              answer = "The perimeter of \\(DEF\\) is \\("+d+"\\)";  
+              break;
+               
+              // areas (*sf*sf)
+              case 3:
+              c = random(10,50);
+              d = formatDec(sf*sf*c);
+              
+              problem += " If the area of \\(ABC\\) is \\("+c+"\\), what is the area of \\(DEF\\)?"; 
+              answer = "The area of \\(DEF\\) is \\("+d+"\\)";  
+              break; 
+               
+              // angles (unchanged)
+              case 4:
+              c = random(10, 100);
+              
+              problem += " If angle \\(A = "+c+"^{\\circ}\\) and angle \\(A\\) corresponds to angle \\(D\\), what is the measure of angle \\(D\\)?"; 
+              answer = "Angle \\(D = "+c+"^{\\circ}\\)";  
+              break;
+           }
+           
+           break;
+       }
+            
+       $("#generated").html(problem);
+       $("#answer").html(doublesigns(answer));
+       renderMathInElement(document.body);
+       //MathJax.Hub.queue.Push(["Typeset",MathJax.Hub,"generated"]);
+       //MathJax.Hub.queue.Push(["Typeset",MathJax.Hub,"answer"]);
+	}
+</script>
