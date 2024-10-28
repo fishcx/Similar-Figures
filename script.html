@@ -130,30 +130,30 @@
            sf = randomDec(2,10,1); 
            a = formatDec(sf*100); // percent
            b = "\\(("+sf+"x, "+sf+"y)\\)"; //rule
-           switch(random(0,2)){
+           switch(random(0,1)){
               
               // Decimal to rule and percent
               case 0:
-              
-              problem = "The scale factor from shape \\(A\\) to shape \\(B\\) is \\("+sf+"\\). What is this written as a percent and as a coordinate rule?";
-              answer = "Percent = \\("+a+"\\%\\), Rule = "+b;
-              
-              break;
-              
-              // Rule to decimal and percent
-              case 1:
-              
-              problem = "The scale factor from shape \\(A\\) to shape \\(B\\) is \\("+a+"\\%\\). What is this written as a decimal and as a coordinate rule?";
-              answer = "Decimal = \\("+sf+"\\), Rule = "+b;
-
+              //problem = "The scale factor from shape \\(A\\) to shape \\(B\\) is \\("+sf+"\\). What is this written as a percent and as a coordinate rule?";
+              problem = "The scale factor from shape \\(A\\) to shape \\(B\\) is \\("+sf+"\\). What is this written as a coordinate rule?";
+              //answer = "Percent = \\("+a+"\\%\\), Rule = "+b;
+              answer = b;
               break;
               
               // Percent to decimal and rule
+              /*
               case 2:
+              problem = "The scale factor from shape \\(A\\) to shape \\(B\\) is \\("+a+"\\%\\). What is this written as a decimal and as a coordinate rule?";
+              answer = "Decimal = \\("+sf+"\\), Rule = "+b;
+              break;
+              */
               
-              problem = "The rule from shape \\(A\\) to shape \\(B\\) is "+b+". What is the scale factor written as a decimal and as a percent?";
-              answer = "Decimal = \\("+sf+"\\), Percent = \\("+a+"\\%\\)";
-
+              // Rule to decimal and percent
+              case 1:
+              //problem = "The rule from shape \\(A\\) to shape \\(B\\) is "+b+". What is the scale factor written as a decimal and as a percent?";
+              problem = "The rule from shape \\(A\\) to shape \\(B\\) is "+b+". What is the scale factor?";
+              //answer = "Decimal = \\("+sf+"\\), Percent = \\("+a+"\\%\\)";
+              answer = "\\("+sf+"\\)";
               break;
            
            }
@@ -167,28 +167,32 @@
            a = formatDec(sf*100); // percent
            b = "\\(("+sf+"x, "+sf+"y)\\)"; //rule
            
-           problem = "Triangle \\(ABC\\) is similar to triangle \\(DEF\\)<br><br>";
+           problem = "Triangle \\(ABC\\) is similar to triangle \\(DEF\\). ";
            
            // determine the format of the scale factor
-           switch(random(0,2)){
+           switch(random(0,1)){
               
               // scale factor is a decimal
               case 0:
               problem += "The scale factor from \\(ABC\\) to \\(DEF\\) is \\("+sf+"\\).";
               break;
               
+              /*
               // scale factor is a percent
-              case 1:
+              case 2:
               problem += "The scale factor from \\(ABC\\) to \\(DEF\\) is \\("+a+"\\%\\).";
               break;
-              
+              */
+
               // scale factor is given as a rule
-              case 2:
+              case 1:
               problem += "The rule from \\(ABC\\) to \\(DEF\\) is "+b+".";
               break;
            
            }
            
+           problem += "<br><br>";
+
            // determine the affected parts
            
            switch(random(0,4)){
@@ -246,7 +250,5 @@
        $("#generated").html(problem);
        $("#answer").html(doublesigns(answer));
        renderMathInElement(document.body);
-       //MathJax.Hub.queue.Push(["Typeset",MathJax.Hub,"generated"]);
-       //MathJax.Hub.queue.Push(["Typeset",MathJax.Hub,"answer"]);
 	}
 </script>
