@@ -6,7 +6,7 @@ function doGet(e) {
       .evaluate()
       .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
   
-  output.setTitle('Similar Figures');
+  output.setTitle('Scale Drawings');
   
   return output;
  
