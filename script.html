@@ -193,20 +193,40 @@
            // Determine how the scale factor (as a percent, decimal, or rule) affects coordnates, side lengths, perimeter, area, angles
            case 2: 
            sf = randomDec(2,10,1); 
-           a = formatDec(sf*100); // percent
-           b = "\\(("+sf+"x, "+sf+"y)\\)"; //rule
+           //a = formatDec(sf*100); // percent
+           //b = "\\(("+sf+"x, "+sf+"y)\\)"; //rule
            
-           problem = "Triangle \\(ABC\\) is similar to triangle \\(DEF\\). ";
-           
+           problem = "Triangle ABC is similar to triangle DEF. ";
+           problem += `The scale factor from ABC to DEF is ${sf}.`;
+           problem += "<br>";
+
+           c = random(2,15);
+           d = formatDec(sf*c);
+
+            switch(random(0,1)){
+
+              // find bigger length
+              case 0:
+              problem += `If AB = ${c} and AB corresponds to DE, what is the length of DE?`; 
+              answer = `DE = ${d}`; 
+              break;
+
+              // find smaller length
+              case 1:
+              problem += `If DE = ${d} and AB corresponds to DE, what is the length of AB?`; 
+              answer = `AB = ${c}`;
+              break;
+            }
+
+           /*
            // determine the format of the scale factor
-           switch(random(0,0)){
+           switch(random(0,2)){
               
               // scale factor is a decimal
               case 0:
               problem += "The scale factor from \\(ABC\\) to \\(DEF\\) is \\("+sf+"\\).";
               break;
               
-              /*
               // scale factor is a percent
               case 2:
               problem += "The scale factor from \\(ABC\\) to \\(DEF\\) is \\("+a+"\\%\\).";
@@ -216,15 +236,11 @@
               case 1:
               problem += "The rule from \\(ABC\\) to \\(DEF\\) is "+b+".";
               break;
-              */
-           
+              
            }
            
-           problem += "<br><br>";
-
            // determine the affected parts
-           // only change side lengths
-           switch(random(1,1)){
+           switch(random(0,4)){
            
               // coordinates (*sf)
               case 0:
@@ -272,6 +288,7 @@
               answer = "Angle \\(D = "+c+"^{\\circ}\\)";  
               break;
            }
+           */
            
            break;
 
