@@ -70,11 +70,36 @@
            case 1: 
            
            sf = random(2,10);
-           answer = "Scale factor \\(= "+sf+"\\)";
-           
-           //switch(random(0,4)){
-          switch(random(1,1)){
-                 
+           a = random(2,20);
+           b = sf*a;
+           var og = "DOG";
+           var img = "MAT"
+           var shape = "Triangle";
+           var shapeL = "triangle";
+
+           if(random(0,1)===0){ og = "DOGS"; img = "MATH"; shape = "Rectangle"; shapeL = "rectangle";}
+
+          problem = `${shape} ${og} is similar to ${shapeL} ${img}. <br><br>If DO corresponds to MA, DO = ${a}, and MA = ${b}, what is the scale factor from `;
+
+          switch(random(0,1)){
+
+              // small to big SF
+              case 0:
+              problem +=  `${og} to ${img}?`;
+              answer = "Scale factor \\(= "+sf+"\\)"; 
+              break;
+              // big to small SF
+
+              case 1:
+              problem +=  `${img} to ${og}?`;
+              answer = "Scale factor \\( = \\cfrac{1}{ "+sf+"}\\)";
+              break;
+
+          }
+          
+          /*
+          switch(random(0,4)){
+                           
               // Using corresponding points, determine the scale factor
               case 0:
                 a = random(-10,10);
@@ -123,7 +148,7 @@
               break;
            
            }
-           
+           */
            
            break;
            
