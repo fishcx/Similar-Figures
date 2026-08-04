@@ -45,8 +45,10 @@
 	function generate(type){
        
        var videoLinks = ["https://www.youtube.com/watch?v=bz_CINpgVWo",
-                         "https://www.youtube.com/watch?v=BoRK05emIrg",
-                         "https://www.youtube.com/watch?v=PCSx2Bu3Wwc"];
+                         "https://www.youtube.com/watch?v=PCSx2Bu3Wwc",
+                         "",
+                         ""
+                         ];
        
        if(videoLinks[type-1].length != 0){ 
          $("#videoLink"). attr("href", videoLinks[type-1]);
@@ -70,8 +72,9 @@
            sf = random(2,10);
            answer = "Scale factor \\(= "+sf+"\\)";
            
-           switch(random(0,4)){
-              
+           //switch(random(0,4)){
+          switch(random(1,1)){
+                 
               // Using corresponding points, determine the scale factor
               case 0:
                 a = random(-10,10);
@@ -126,7 +129,8 @@
            
            // Converting the scale factor
            // Scale factor conversion between percent, decimal, and rule
-           case 2: 
+           // No longer used as of Summer 2026
+           case 5: 
            sf = randomDec(2,10,1); 
            a = formatDec(sf*100); // percent
            b = "\\(("+sf+"x, "+sf+"y)\\)"; //rule
@@ -161,8 +165,8 @@
            break;
            
            // Using the scale factor
-           // Determine how the scale factor (as a percent, decimal, or rule) affects coordinates, side lengths, perimeter, area, angles
-           case 3: 
+           // Determine how the scale factor (as a percent, decimal, or rule) affects coordnates, side lengths, perimeter, area, angles
+           case 2: 
            sf = randomDec(2,10,1); 
            a = formatDec(sf*100); // percent
            b = "\\(("+sf+"x, "+sf+"y)\\)"; //rule
@@ -170,7 +174,7 @@
            problem = "Triangle \\(ABC\\) is similar to triangle \\(DEF\\). ";
            
            // determine the format of the scale factor
-           switch(random(0,1)){
+           switch(random(0,0)){
               
               // scale factor is a decimal
               case 0:
@@ -182,20 +186,20 @@
               case 2:
               problem += "The scale factor from \\(ABC\\) to \\(DEF\\) is \\("+a+"\\%\\).";
               break;
-              */
 
               // scale factor is given as a rule
               case 1:
               problem += "The rule from \\(ABC\\) to \\(DEF\\) is "+b+".";
               break;
+              */
            
            }
            
            problem += "<br><br>";
 
            // determine the affected parts
-           
-           switch(random(0,4)){
+           // only change side lengths
+           switch(random(1,1)){
            
               // coordinates (*sf)
               case 0:
@@ -245,10 +249,172 @@
            }
            
            break;
+
+           // scale drawings
+           case 3:
+
+            var person = generateName();
+            var name = person.name;
+            var pron = person.pronoun;
+            var scale = randomDec(1.1,3,1);
+            var actualLength = randomDec(3,6,1);
+            var scaleLength = formatDec(actualLength*scale);
+            var actualWidth = randomDec(2,4,1);
+            var scaleWidth = formatDec(actualWidth*scale);
+            var scalePerim = formatDec(2*scaleLength+2*scaleWidth);
+            var actualPerim = formatDec(2*actualLength+2*actualWidth);
+            var scaleArea = formatDec(scaleLength*scaleWidth);
+            var actualArea = formatDec(actualLength*actualWidth);
+
+            problem = `${name} created a scale drawing of ${pron} bedroom for a class project using a scale of 1 ft to ${scale} cm. `
+            
+            switch(random(0,1)){
+
+              // Given drawing measurements
+              case 0:
+              problem += `On the drawing, ${name}'s rectangular bed is ${scaleLength} cm long and ${scaleWidth} cm wide. <br>`;
+
+                switch(random(0,3)){
+                  
+                  // find the length
+                  case 0:
+                  problem += `What is the actual length, in feet, of ${name}'s bed?`;
+                  answer = `${actualLength} ft`;
+                  break;
+
+                  // find the width
+                  case 1:
+                  problem += `What is the actual width, in feet, of ${name}'s bed?`;
+                  answer = `${actualWidth} ft`;
+
+                  break;
+
+                  // find the perimeter
+                  case 2:
+                  problem += `What is the actual perimeter, in feet, of ${name}'s bed?`;
+                  answer = `${actualPerim} ft`;
+
+                  break;
+
+                  // find the area
+                  case 3:
+                  problem += `What is the actual area, in square feet, of ${name}'s bed?`;
+                  answer = `${actualArea} square ft`;
+                  break;
+
+                }
+
+              break;
+
+              // Given actual measurements
+              case 1:
+              problem += `${name}'s actual rectangular bed is ${actualLength} ft long and ${actualWidth} ft wide. <br>`;
+
+                switch(random(0,3)){
+                  
+                  // find the length
+                  case 0:
+                  problem += `On the scale drawing, what is the length, in centimeters, of ${name}'s bed?`;
+                  answer = `${scaleLength} cm`;
+                  break;
+
+                  // find the width
+                  case 1:
+                  problem += `On the scale drawing, what is the width, in centimeters, of ${name}'s bed?`;
+                  answer = `${scaleWidth} cm`;
+
+                  break;
+
+                  // find the perimeter
+                  case 2:
+                  problem += `On the scale drawing, what is the perimeter, in centimeters, of ${name}'s bed?`;
+                  answer = `${scalePerim} cm`;
+
+                  break;
+
+                  // find the area
+                  case 3:
+                  problem += `On the scale drawing, what is the area, in square centimeters, of ${name}'s bed?`;
+                  answer = `${scaleArea} square cm`;
+                  break;
+
+                }
+
+              break;
+
+            }
+
+           break;
+
+          // scale map
+           case 4:
+           var scale = random(4,12)*5;
+          
+           var options = [
+                            {city1: "New York City", city2: "Washington, D.C.", dist: 225},
+                            {city1: "New York City", city2: "Los Angeles", dist: 2445},
+                            {city1: "Chicago", city2: "Houston", dist: 940},
+                            {city1: "Boston", city2: "New York City", dist: 190},
+                            {city1: "London", city2: "Paris", dist: 210},
+                            {city1: "London", city2: "Dubai", dist: 3400},
+                            {city1: "Los Angeles", city2: "San Francisco", dist: 345},
+                            {city1: "Miami", city2: "New York City", dist: 1090},
+                            {city1: "Seattle", city2: "Los Angeles", dist: 960},
+                            {city1: "Dallas", city2: "Chicago", dist: 3400} 
+                          ];
+
+           problem = `A map has a scale of 1 centimeter = ${scale} miles. `;
+
+           var selected = options[random(0,options.length-1)];
+           var scaleDist = formatDec(Math.round(selected.dist/scale*10000)/10000);
+
+           switch(random(0,1)){
+
+              // given actual
+              case 0:
+              problem += `The actual distance between ${selected.city1} and ${selected.city2}, is ${selected.dist} miles. <br> What is the distance, in centimeters, between the two cities on the map?`;
+              answer = `${scaleDist} centimeters`;
+              break;
+
+              // given scale
+              case 1:
+              problem += `The scale distance on the map between ${selected.city1} and ${selected.city2}, is ${scaleDist} centimeters. <br> What is the actual distance, in miles, between the two cities?`;
+              answer = `${selected.dist} miles`;
+              break;
+
+           }
+           break;
        }
             
        $("#generated").html(problem);
        $("#answer").html(doublesigns(answer));
        renderMathInElement(document.body);
 	}
+
+  // helper function for generatePropWord
+    function generateName(){
+       
+       var options = [
+                          {name:"John", pronoun:"his"},
+                          {name:"Jane", pronoun:"her"},
+                          {name:"Bill", pronoun:"his"},
+                          {name:"Alex", pronoun:"her"},
+                          {name:"Jennifer", pronoun:"her"},
+                          {name:"Skyler", pronoun:"her"},
+                          {name:"Michael", pronoun:"his"},
+                          {name:"Sarah", pronoun:"her"},
+                          {name:"Kim", pronoun:"her"},
+                          {name:"Jacob", pronoun:"his"},
+                          {name:"Jessica", pronoun:"her"},
+                          {name:"Antonio", pronoun:"his"},
+                          {name:"Anthony", pronoun:"his"},
+                          {name:"Rebecca", pronoun:"her"},
+                          {name:"Jen", pronoun:"her"},
+                          {name:"Jeff", pronoun:"his"}
+                      ];
+        
+        var chosen = options[random(0,options.length-1)];
+        return chosen;
+    }
+
 </script>
