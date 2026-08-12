@@ -414,13 +414,13 @@
 
               // given actual
               case 0:
-              problem += `The actual distance between ${selected.city1} and ${selected.city2}, is ${selected.dist} miles. <br> What is the distance, in centimeters, between the two cities on the map?`;
+              problem += `The actual distance between ${selected.city1} and ${selected.city2} is ${selected.dist} miles. <br> What is the distance, in centimeters, between the two cities on the map?`;
               answer = `${scaleDist} centimeters`;
               break;
 
               // given scale
               case 1:
-              problem += `The scale distance on the map between ${selected.city1} and ${selected.city2}, is ${scaleDist} centimeters. <br> What is the actual distance, in miles, between the two cities?`;
+              problem += `The scale distance on the map between ${selected.city1} and ${selected.city2} is ${scaleDist} centimeters. <br> What is the actual distance, in miles, between the two cities?`;
               answer = `${selected.dist} miles`;
               break;
 
