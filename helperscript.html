@@ -3,7 +3,40 @@
     function doublesigns(string){
        return string.replaceAll("-+", "-").replaceAll("- +", "-").replaceAll("+ -", "-").replaceAll("- -", "+").replaceAll("+-", "-").replaceAll("-- ", "+");
     }
+    function decToFrac(dec){
+        
+        var decimal = formatDec(dec);
+        var isNegative = false;
+        
+        // take negative sign out for now
+        if(decimal < 0){ isNegative = true; decimal = -1*decimal; }
+        
+        var decPiece = formatDec(decimal-Math.floor(decimal));
+        var whole = Math.floor(decimal);
+        
+        // add negative sign back in
+        var output = "";
+
+        if(whole != 0){ output += whole}
+        
+        // this is needed for floating point errors when mutliplying decimals
+        var num = formatDec(decPiece*Math.pow(10,decimal.countDecimals()));
+        
+        if(decPiece != 0){ output += simplifyFrac(num,Math.pow(10,decimal.countDecimals()));}
+        
+        if(isNegative){ output = "-"+output;}
+        
+        return output;
+       
+    }
+    // half the time make decimal into mixed number
+    function halfConvert(dec){
+       
+       var output = dec;
+       if(random(0,1) == 1){ output = decToFrac(dec); }
+       return output;
     
+    }
     // function to replace all occurences of a string
     String.prototype.replaceAll = function(searchStr, replaceStr) {
 	   var str = this;
@@ -81,5 +114,8 @@
         }
       
     }
-
+Number.prototype.countDecimals = function () {
+    if(Math.floor(this.valueOf()) === this.valueOf()) return 0;
+    return this.toString().split(".")[1].length || 0; 
+}
 </script>
