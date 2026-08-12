@@ -299,48 +299,79 @@
             var name = person.name;
             var pron = person.pronoun;
             var scale = randomDec(1.1,3,1);
-            var actualLength = randomDec(3,6,1);
+            var actualLength;  
+            var actualWidth;
+            var room = '';
+            var item = '';
+
+            switch(random(0,2)){
+
+                // bedroom -> bed
+                case 0:
+                do{ actualWidth = randomDec(3,6,1);
+                    actualLength = randomDec(5,7,1); } while(actualWidth > actualLength);
+                room = "bedroom";
+                item = "bed";
+                break;
+
+                // office -> desk
+                case 1:
+                do{ actualWidth = randomDec(2,3,1);
+                    actualLength = randomDec(4,7,1); } while(actualWidth > actualLength);
+                room = "office";
+                item = "desk";
+                break;
+
+                // living room -> couch
+                case 2:
+                do{ actualWidth = randomDec(3,4,1);
+                    actualLength = randomDec(6,8,1); } while(actualWidth > actualLength);
+                room = "living room";
+                item = "couch";
+                break;
+
+            }
+
             var scaleLength = formatDec(actualLength*scale);
-            var actualWidth = randomDec(2,4,1);
             var scaleWidth = formatDec(actualWidth*scale);
             var scalePerim = formatDec(2*scaleLength+2*scaleWidth);
             var actualPerim = formatDec(2*actualLength+2*actualWidth);
             var scaleArea = formatDec(scaleLength*scaleWidth);
             var actualArea = formatDec(actualLength*actualWidth);
 
-            problem = `${name} created a scale drawing of ${pron} bedroom for a class project using a scale of 1 ft to ${scale} cm. `
-            
+            problem = `${name} created a scale drawing of ${pron} ${room} using a scale of 1 ft to ${scale} cm. `
+
             switch(random(0,1)){
 
               // Given drawing measurements
               case 0:
-              problem += `On the drawing, ${name}'s rectangular bed is ${scaleLength} cm long and ${scaleWidth} cm wide. <br>`;
+              problem += `On the drawing, ${name}'s rectangular ${item} is ${scaleLength} cm long and ${scaleWidth} cm wide. <br>`;
 
                 switch(random(0,3)){
                   
                   // find the length
                   case 0:
-                  problem += `What is the actual length, in feet, of ${name}'s bed?`;
+                  problem += `What is the actual length, in feet, of ${name}'s ${item}?`;
                   answer = `${actualLength} ft`;
                   break;
 
                   // find the width
                   case 1:
-                  problem += `What is the actual width, in feet, of ${name}'s bed?`;
+                  problem += `What is the actual width, in feet, of ${name}'s ${item}?`;
                   answer = `${actualWidth} ft`;
 
                   break;
 
                   // find the perimeter
                   case 2:
-                  problem += `What is the actual perimeter, in feet, of ${name}'s bed?`;
+                  problem += `What is the actual perimeter, in feet, of ${name}'s ${item}?`;
                   answer = `${actualPerim} ft`;
 
                   break;
 
                   // find the area
                   case 3:
-                  problem += `What is the actual area, in square feet, of ${name}'s bed?`;
+                  problem += `What is the actual area, in square feet, of ${name}'s ${item}?`;
                   answer = `${actualArea} square ft`;
                   break;
 
@@ -350,33 +381,33 @@
 
               // Given actual measurements
               case 1:
-              problem += `${name}'s actual rectangular bed is ${actualLength} ft long and ${actualWidth} ft wide. <br>`;
+              problem += `${name}'s actual rectangular ${item} is ${actualLength} ft long and ${actualWidth} ft wide. <br>`;
 
                 switch(random(0,3)){
                   
                   // find the length
                   case 0:
-                  problem += `On the scale drawing, what is the length, in centimeters, of ${name}'s bed?`;
+                  problem += `On the scale drawing, what is the length, in centimeters, of ${name}'s ${item}?`;
                   answer = `${scaleLength} cm`;
                   break;
 
                   // find the width
                   case 1:
-                  problem += `On the scale drawing, what is the width, in centimeters, of ${name}'s bed?`;
+                  problem += `On the scale drawing, what is the width, in centimeters, of ${name}'s ${item}?`;
                   answer = `${scaleWidth} cm`;
 
                   break;
 
                   // find the perimeter
                   case 2:
-                  problem += `On the scale drawing, what is the perimeter, in centimeters, of ${name}'s bed?`;
+                  problem += `On the scale drawing, what is the perimeter, in centimeters, of ${name}'s ${item}?`;
                   answer = `${scalePerim} cm`;
 
                   break;
 
                   // find the area
                   case 3:
-                  problem += `On the scale drawing, what is the area, in square centimeters, of ${name}'s bed?`;
+                  problem += `On the scale drawing, what is the area, in square centimeters, of ${name}'s ${item}?`;
                   answer = `${scaleArea} square cm`;
                   break;
 
