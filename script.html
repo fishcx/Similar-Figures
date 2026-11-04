@@ -16,7 +16,7 @@
     
     $('#video-button').hide();
     
-    var testing = false;
+    var testing = true;
     $('#generate').click(function(){
         if(!testing){$("#answer").hide(); $("#show-answer").val("Show Answer");}
 
@@ -445,13 +445,13 @@
                         // find the length
                         case 0:
                         problem += `What is the actual length in feet?`;
-                        answer = `${actualLengthP} ft`;
+                        answer = `${actualLength} ft`;
                         break;
 
                         // find the width
                         case 1:
                         problem += `What is the actual width in feet?`;
-                        answer = `${actualWidthP} ft`;
+                        answer = `${actualWidth} ft`;
                         break;
 
                     }
@@ -492,13 +492,13 @@
                             // find the length
                             case 0:
                             problem += `what is the length, in centimeters, on the scale drawing?`;
-                            answer = `${scaleLengthP} cm`;
+                            answer = `${scaleLength} cm`;
                             break;
 
                             // find the width
                             case 1:
                             problem += `what is the width, in centimeters, on the scale drawing?`;
-                            answer = `${scaleWidthP} cm`;
+                            answer = `${scaleWidth} cm`;
                             break;
 
                     }
