@@ -47,7 +47,8 @@
        var videoLinks = ["https://www.youtube.com/watch?v=02VKekhsWHU",
                          "https://www.youtube.com/watch?v=8TdwU2p1ZeY",
                          "https://www.youtube.com/watch?v=ekHdOTuYs54",
-                         "https://www.youtube.com/watch?v=Q_LsdSXC7tQ"
+                         "https://www.youtube.com/watch?v=Q_LsdSXC7tQ",
+                         "https://www.youtube.com/watch?v=ekHdOTuYs54"
                          ];
        
        if(videoLinks[type-1].length != 0){ 
@@ -152,6 +153,7 @@
            
            break;
            
+           /*
            // Converting the scale factor
            // Scale factor conversion between percent, decimal, and rule
            // No longer used as of Summer 2026
@@ -159,7 +161,7 @@
            sf = randomDec(2,10,1); 
            a = formatDec(sf*100); // percent
            b = "\\(("+sf+"x, "+sf+"y)\\)"; //rule
-           switch(random(0,1)){
+           switch(random(0,2)){
               
               // Decimal to rule and percent
               case 0:
@@ -170,12 +172,12 @@
               break;
               
               // Percent to decimal and rule
-              /*
+            
               case 2:
               problem = "The scale factor from shape \\(A\\) to shape \\(B\\) is \\("+a+"\\%\\). What is this written as a decimal and as a coordinate rule?";
               answer = "Decimal = \\("+sf+"\\), Rule = "+b;
               break;
-              */
+            
               
               // Rule to decimal and percent
               case 1:
@@ -188,7 +190,8 @@
            }
            
            break;
-           
+           */
+
            // Using the scale factor
            // Determine how the scale factor (as a percent, decimal, or rule) affects coordnates, side lengths, perimeter, area, angles
            case 2: 
@@ -292,137 +295,18 @@
            
            break;
 
-           // scale drawings
+           // scale drawings - length and width
            case 3:
+           var scaleDraw = generateScale(0);
+           problem = scaleDraw.prb;
+           answer = scaleDraw.ans;
+           break;
 
-            var person = generateName();
-            var name = person.name;
-            var pron = person.pronoun;
-            var scale = randomDec(1.1,3,1);
-            var scaleP = `\\(${halfConvert(scale)}\\)`;
-            var actualLength;  
-            var actualWidth;
-            var room = '';
-            var item = '';
-
-            switch(random(0,2)){
-
-                // bedroom -> bed
-                case 0:
-                do{ actualWidth = randomDec(3,6,1);
-                    actualLength = randomDec(5,7,1); } while(actualWidth > actualLength);
-                room = "bedroom";
-                item = "bed";
-                break;
-
-                // office -> desk
-                case 1:
-                do{ actualWidth = randomDec(2,3,1);
-                    actualLength = randomDec(4,7,1); } while(actualWidth > actualLength);
-                room = "office";
-                item = "desk";
-                break;
-
-                // living room -> couch
-                case 2:
-                do{ actualWidth = randomDec(3,4,1);
-                    actualLength = randomDec(6,8,1); } while(actualWidth > actualLength);
-                room = "living room";
-                item = "couch";
-                break;
-
-            }
-            var actualWidthP = `\\(${halfConvert(actualWidth)}\\)`;
-            var actualLengthP = `\\(${halfConvert(actualLength)}\\)`;
-
-            var scaleLength = formatDec(actualLength*scale);
-            var scaleWidth = formatDec(actualWidth*scale);
-            var scalePerim = formatDec(2*scaleLength+2*scaleWidth);
-            var actualPerim = formatDec(2*actualLength+2*actualWidth);
-            var scaleArea = formatDec(scaleLength*scaleWidth);
-            var actualArea = formatDec(actualLength*actualWidth);
-
-            var scaleWidthP = `\\(${halfConvert(scaleWidth)}\\)`;
-            var scaleLengthP = `\\(${halfConvert(scaleLength)}\\)`;
-
-            problem = `${name} created a scale drawing of ${pron} ${room} using a scale of 1 ft to ${scaleP} cm. `
-
-            switch(random(0,1)){
-
-              // Given drawing measurements
-              case 0:
-              problem += `On the drawing, ${name}'s rectangular ${item} is ${scaleLengthP} cm long and ${scaleWidthP} cm wide. <br>`;
-
-                switch(random(0,3)){
-                  
-                  // find the length
-                  case 0:
-                  problem += `What is the actual length, in feet, of ${name}'s ${item}?`;
-                  answer = `${actualLengthP} ft`;
-                  break;
-
-                  // find the width
-                  case 1:
-                  problem += `What is the actual width, in feet, of ${name}'s ${item}?`;
-                  answer = `${actualWidthP} ft`;
-
-                  break;
-
-                  // find the perimeter
-                  case 2:
-                  problem += `What is the actual perimeter, in feet, of ${name}'s ${item}?`;
-                  answer = `${actualPerim} ft`;
-
-                  break;
-
-                  // find the area
-                  case 3:
-                  problem += `What is the actual area, in square feet, of ${name}'s ${item}?`;
-                  answer = `${actualArea} square ft`;
-                  break;
-
-                }
-
-              break;
-
-              // Given actual measurements
-              case 1:
-              problem += `${name}'s actual rectangular ${item} is ${actualLengthP} ft long and ${actualWidthP} ft wide. <br>`;
-
-                switch(random(0,3)){
-                  
-                  // find the length
-                  case 0:
-                  problem += `On the scale drawing, what is the length, in centimeters, of ${name}'s ${item}?`;
-                  answer = `${scaleLengthP} cm`;
-                  break;
-
-                  // find the width
-                  case 1:
-                  problem += `On the scale drawing, what is the width, in centimeters, of ${name}'s ${item}?`;
-                  answer = `${scaleWidthP} cm`;
-
-                  break;
-
-                  // find the perimeter
-                  case 2:
-                  problem += `On the scale drawing, what is the perimeter, in centimeters, of ${name}'s ${item}?`;
-                  answer = `${scalePerim} cm`;
-
-                  break;
-
-                  // find the area
-                  case 3:
-                  problem += `On the scale drawing, what is the area, in square centimeters, of ${name}'s ${item}?`;
-                  answer = `${scaleArea} square cm`;
-                  break;
-
-                }
-
-              break;
-
-            }
-
+           // scale drawings - area and perimeter
+           case 5:
+           var scaleDraw = generateScale(1);
+           problem = scaleDraw.prb;
+           answer = scaleDraw.ans;
            break;
 
           // scale map
@@ -494,6 +378,158 @@
         
         var chosen = options[random(0,options.length-1)];
         return chosen;
+    }
+
+    function generateScale(type){
+
+        var person = generateName();
+            var name = person.name;
+            var pron = person.pronoun;
+            var scale = randomDec(1.1,3,1);
+            var scaleP = `\\(${halfConvert(scale)}\\)`;
+            var actualLength;  
+            var actualWidth;
+            var room = '';
+            var item = '';
+
+            switch(random(0,2)){
+
+                // bedroom -> bed
+                case 0:
+                do{ actualWidth = randomDec(3,6,1);
+                    actualLength = randomDec(5,7,1); } while(actualWidth > actualLength);
+                room = "bedroom";
+                item = "bed";
+                break;
+
+                // office -> desk
+                case 1:
+                do{ actualWidth = randomDec(2,3,1);
+                    actualLength = randomDec(4,7,1); } while(actualWidth > actualLength);
+                room = "office";
+                item = "desk";
+                break;
+
+                // living room -> couch
+                case 2:
+                do{ actualWidth = randomDec(3,4,1);
+                    actualLength = randomDec(6,8,1); } while(actualWidth > actualLength);
+                room = "living room";
+                item = "couch";
+                break;
+
+            }
+            var actualWidthP = `\\(${halfConvert(actualWidth)}\\)`;
+            var actualLengthP = `\\(${halfConvert(actualLength)}\\)`;
+
+            var scaleLength = formatDec(actualLength*scale);
+            var scaleWidth = formatDec(actualWidth*scale);
+            var scalePerim = formatDec(2*scaleLength+2*scaleWidth);
+            var actualPerim = formatDec(2*actualLength+2*actualWidth);
+            var scaleArea = formatDec(scaleLength*scaleWidth);
+            var actualArea = formatDec(actualLength*actualWidth);
+
+            var scaleWidthP = `\\(${halfConvert(scaleWidth)}\\)`;
+            var scaleLengthP = `\\(${halfConvert(scaleLength)}\\)`;
+
+            switch(random(0,1)){
+
+              // Given drawing measurements
+              case 0:
+              problem = `${name}'s ${item} is ${scaleLengthP} cm long and ${scaleWidthP} cm wide on a scale drawing where  1 ft = ${scaleP} cm. `;
+
+                if(type === 0){
+                      
+                    switch(random(0,1)){
+
+                        // find the length
+                        case 0:
+                        problem += `What is the actual length in feet?`;
+                        answer = `${actualLengthP} ft`;
+                        break;
+
+                        // find the width
+                        case 1:
+                        problem += `What is the actual width in feet?`;
+                        answer = `${actualWidthP} ft`;
+                        break;
+
+                    }
+
+                }
+                else{
+
+                  switch(random(2,3)){
+                  
+                  // find the perimeter
+                  case 2:
+                  problem += `What is the actual perimeter in feet?`;
+                  answer = `${actualPerim} ft`;
+
+                  break;
+
+                  // find the area
+                  case 3:
+                  problem += `What is the actual area in square feet?`;
+                  answer = `${actualArea} square ft`;
+                  break;
+
+                }
+
+                }
+
+              break;
+
+              // Given actual measurements
+              case 1:
+
+              problem = `${name}'s ${item} is ${actualLengthP} ft long and ${actualWidthP} ft wide. If 1 ft = ${scaleP} cm, `;
+                
+                if(type === 0){
+
+                    switch(random(0,1)){
+
+                            // find the length
+                            case 0:
+                            problem += `what is the length, in centimeters, on the scale drawing?`;
+                            answer = `${scaleLengthP} cm`;
+                            break;
+
+                            // find the width
+                            case 1:
+                            problem += `what is the width, in centimeters, on the scale drawing?`;
+                            answer = `${scaleWidthP} cm`;
+                            break;
+
+                    }
+                }
+                else{
+
+                  switch(random(2,3)){
+                  
+                  // find the perimeter
+                  case 2:
+                  problem += `what is the perimeter, in centimeters, on the scale drawing?`;
+                  answer = `${scalePerim} cm`;
+                  break;
+
+                  // find the area
+                  case 3:
+                  problem += `what is the area, in square centimeters, on the scale drawing?`;
+                  answer = `${scaleArea} square cm`;
+                  break;
+
+                }
+
+                }                  
+                
+
+              break;
+
+            }
+
+        return {prb: problem, ans: answer};
+
     }
 
 </script>
